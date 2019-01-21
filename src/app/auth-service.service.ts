@@ -19,7 +19,7 @@ export class AuthServiceService {
     this.token = null;
     this.isAuthenticated = false;
     this.AuthStatusListener.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   getToken() {
@@ -54,7 +54,7 @@ export class AuthServiceService {
       if (this.token) {
         this.isAuthenticated = true;
         this.AuthStatusListener.next(true);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
   }
