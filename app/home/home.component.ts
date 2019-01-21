@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.catsSub.unsubscribe();
-    this.subCatsSub.unsubscribe();
+//    this.catsSub.unsubscribe();
+//    this.subCatsSub.unsubscribe();
   }
 
   indexChange(evt: any) {
