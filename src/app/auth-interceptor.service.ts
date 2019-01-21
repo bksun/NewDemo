@@ -13,7 +13,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     console.log('new token', authToken);
     console.log('----->', authToken);
     const authRequest = req.clone({
-      params: req.params.set('accessTokens?access_token', 'Bearer ' + authToken)
+      params: req.params.set('accessTokens?access_token', '' + authToken)
     });
     console.log('interceptor token', authRequest.headers, authRequest);
     return next.handle(authRequest);
