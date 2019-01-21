@@ -4,9 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from '../app/posts/post-create/post-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatExpansionModule,  MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+import { MatExpansionModule, MatTabsModule, MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
@@ -14,6 +13,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { SignupComponent } from './signup/signup.component';
 // import { AuthServiceService } from './auth-service.service';
 import {  AuthInterceptorService } from './auth-interceptor.service';
+import { CategoriesService } from './common/services/categories.service';
+import { HomeComponent } from './home/home.component';
+import { SubCatsComponent } from './sub-cats/sub-cats.component';
 
 
 @NgModule({
@@ -23,13 +25,16 @@ import {  AuthInterceptorService } from './auth-interceptor.service';
     HeaderComponent,
     PostListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    SubCatsComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatInputModule,
+    MatInputModule, MatTabsModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
@@ -37,7 +42,7 @@ import {  AuthInterceptorService } from './auth-interceptor.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }, CategoriesService],
   bootstrap: [AppComponent]
 })
 
