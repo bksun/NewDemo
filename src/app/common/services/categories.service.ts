@@ -20,7 +20,7 @@ export class CategoriesService {
     this.http.get<{ posts: any}>('https://bksun.herokuapp.com/api/Categories')
     .subscribe(( transformedPosts) => {
       this.categories = [transformedPosts];
-      console.log('service', transformedPosts);
+     // console.log('service', transformedPosts);
       this.catsUpdated.next([...this.categories]);
     });
   }
@@ -31,7 +31,7 @@ export class CategoriesService {
     ('https://bksun.herokuapp.com/api/categories/' + subcats + '/subcategories')
     .subscribe(( transformedPosts) => {
       this.subCategories = [transformedPosts];
-      console.log('service', transformedPosts);
+    //  console.log('service', transformedPosts);
       this.subCatsUpdated.next([...this.subCategories]);
     });
   }

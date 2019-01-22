@@ -51,16 +51,20 @@ export class AuthServiceService {
   loginUser( email: string, password: string) {
     //console.log('log in data called');
      const authData: AuthData = { email: email, password: password };
-    this.http.post<{id: string}> ('https://bksun.herokuapp.com/api/Users/login', authData)
+    this.http.post<{id: string, email: string}> ('https://bksun.herokuapp.com/api/Users/login', authData)
     .subscribe(result => {
       // console.log('api login result', result.id);
+      localStorage.removeItem('user');
       const tempToken = result.id;
       this.token = tempToken;
 
       if (this.token) {
         localStorage.setItem('user', JSON.stringify(this.token));
+        localStorage.setItem('email', JSON.stringify(result.email));
         const user  = localStorage.getItem('user');
-        console.log('user:', user);
+        console.log('user after login:', user);
+        console.log('email after login:', result.email);
+        console.log('result after login:', result);
         this.isAuthenticated = true;
         this.AuthStatusListener.next(true);
         this.router.navigate(['/home']);
@@ -69,7 +73,7 @@ export class AuthServiceService {
       const user  = localStorage.getItem('user');
         if(user !== 'undefined') {
           const user  = localStorage.getItem('user');
-          console.log('user:', user);
+          console.log('user after login:', user);
           this.isAuthenticated = true;
           this.AuthStatusListener.next(true);
           this.router.navigate(['/home']);

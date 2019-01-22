@@ -16,6 +16,7 @@ import {  AuthInterceptorService } from './auth-interceptor.service';
 import { CategoriesService } from './common/services/categories.service';
 import { HomeComponent } from './home/home.component';
 import { SubCatsComponent } from './sub-cats/sub-cats.component';
+import { SubpostComponent } from './posts/subpost/subpost.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SubCatsComponent } from './sub-cats/sub-cats.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    SubCatsComponent
+    SubCatsComponent,
+    SubpostComponent
 
   ],
   imports: [

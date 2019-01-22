@@ -16,38 +16,21 @@ private postsUpdated = new Subject<Post[]>();
 
   constructor( public http: HttpClient) { }
 
-  getPosts() {
-    this.http.get<{ message: string; posts: any}>('http://localhost:3000/api/posts')
-    .pipe(map( (postData) => {
-      return postData.posts.map( post => {
-        return {
-          title: post.title,
-          content: post.content,
-          id: post._id
-        };
-      });
-    }))
-    .subscribe(( transformedPosts) => {
-      this.posts = transformedPosts;
-      this.postsUpdated.next([...this.posts]);
+  addSubPost( title: string, sub: number, content: string) {
+    const subpost = { name: title, categoryId: sub, description: content};
+    console.log('subposts', subpost, sub)
+    this.http.post<{message: string, createdId: string}>('https://bksun.herokuapp.com/api/Categories/'+ sub + '/subcategories', subpost)
+    .subscribe((postData ) => {
+      console.log( 'response : ', postData);
+      //post.id = postData.createdId;
+      //this.posts.push(post);
+   //   this.postsUpdated.next([...this.posts]);
     });
   }
 
-  getPostUpdateListener() {
-    return this.postsUpdated.asObservable();
-  }
-
-   customFun( post ) {
-    return {
-      title: post.title,
-      content: post.content,
-      id: post._id
-    };
-  }
-
   addPost( title: string, content: string) {
-    const post: Post = { id: null, title: title, content: content};
-    this.http.post<{message: string, createdId: string}>('http://localhost:3000/api/posts', post)
+    const post: Post = { id: null, name: title, description: content};
+    this.http.post<{message: string, createdId: string}>('https://bksun.herokuapp.com/api/categories/', post)
     .subscribe((postData ) => {
       console.log(postData);
       post.id = postData.createdId;

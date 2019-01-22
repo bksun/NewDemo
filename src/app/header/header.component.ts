@@ -12,13 +12,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
-
+  email:string;
   constructor(private authServ: AuthServiceService) { }
 
   ngOnInit() {
     this.authListenerSubs = this.authServ.getAuthStatusListener().subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
+      alert('home init');
     });
+
+    const temp = localStorage.getItem('email');
+    if( temp !== 'undefined' || temp !== null ) {
+      this.email = temp
+      console.log('email-home', temp);
+    }
+    else {
+      this.email = 'Test-User';
+    }
   }
 
   ngOnDestroy() {
@@ -28,7 +38,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     // alert('logout');
     localStorage.removeItem('user');
-    console.log(localStorage.getItem('user'));
+    localStorage.removeItem('email');
+    // console.log(localStorage.getItem('user'));
     this.authServ.logout();
   }
 
